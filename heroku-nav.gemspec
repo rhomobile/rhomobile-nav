@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{heroku-nav}
+  s.name = %q{rhomobile-nav}
   s.version = "0.1.19"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -15,13 +15,13 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
      "Rakefile",
-     "heroku-nav.gemspec",
+     "rhomobile-nav.gemspec",
      "lib/heroku/nav.rb",
      "spec/api_spec.rb",
      "spec/base.rb",
      "spec/nav_spec.rb"
   ]
-  s.homepage = %q{http://heroku.com}
+  s.homepage = %q{http://rhomobile.com}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}

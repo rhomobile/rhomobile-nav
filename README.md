@@ -9,19 +9,19 @@ displaying a customized header for users coming from a single sign-on session.
 
 Use it just like any Rack middleware:
 
-    require 'heroku/nav'
-    use Heroku::Nav::Provider
+    require 'rhomobile/nav'
+    use Rhomobile::Nav::Provider
 
 That will fetch the latest header from our API and insert it as the first
-element inside the body tag when the cookie "heroku-nav-data" is defined.
+element inside the body tag when the cookie "rhomobile-nav-data" is defined.
 
 For Rails apps, add it to your Gemfile:
 
-    gem 'heroku-nav', :require => 'heroku/nav'
+    gem 'rhomobile-nav', :require => 'rhomobile/nav'
 
 And add the middleware like:
 
-    config.middleware.use Heroku::Nav::Provider
+    config.middleware.use Rhomobile::Nav::Provider
 
 
 ## Meta #######################################################################

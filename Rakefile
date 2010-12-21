@@ -8,10 +8,10 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "heroku-nav"
+    gemspec.name = "rhomobile-nav"
     gemspec.summary = ""
     gemspec.description = ""
-    gemspec.homepage = "http://heroku.com"
+    gemspec.homepage = "http://rhomobile.com"
     gemspec.authors = ["David Dollar", "Pedro Belo", "Todd Matthews"]
     gemspec.email = ["david@heroku.com", "pedro@heroku.com", "todd@heroku.com"]
 
