@@ -7,10 +7,12 @@ module Rhomobile
         @app     = app
         @options = options
         @options[:status] ||= [200]
+        @options[:nav_host] ||= "http://rhohub.com"
+        @nav_host = @options[:nav_host]
       end
 
       def call(env)
-        @enviroment = env
+        @env = env
         @status, @headers, @body = @app.call(env)
         @body.extend(Enumerable)
         @body = @body.to_a.join
@@ -31,33 +33,16 @@ module Rhomobile
       end
       
       def footer
-        open(footer_uri).read
+        open("#{@nav_host}/footer").read
       end
       
       def header
-        if @enviroment['HTTP_COOKIE'] && @enviroment['HTTP_COOKIE'].include?('rho_user')
-          user = @enviroment['HTTP_COOKIE']
-          open(header_uri(user)).read
+        if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
+          user = @env['HTTP_COOKIE']['rho_user']
+          open("#{@nav_host}/nav/#{user}").read
         else
-          open(header_uri).read
+          open("#{@nav_host}/nav").read
         end
-      end
-      
-      def header_uri(user=nil)
-        if user
-          "#{host}+/nav/#{user}"
-        else
-          "#{host}+/nav"
-        end
-      end
-      
-      def footer_uri
-        "#{host}+/footer"
-      end
-      
-      def host
-        host = @enviroment['HTTP_HOST'] || "#{@enviroment['SERVER_NAME'] || @enviroment['SERVER_ADDR']}:#{@enviroment['SERVER_PORT']}"
-        host
       end
 
     end
