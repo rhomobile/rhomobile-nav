@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     ".gitignore",
      "Rakefile",
      "rhomobile-nav.gemspec",
-     "lib/heroku/nav.rb",
+     "lib/rhomobile/nav.rb",
      "spec/api_spec.rb",
      "spec/base.rb",
      "spec/nav_spec.rb"
