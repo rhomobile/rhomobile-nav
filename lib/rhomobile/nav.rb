@@ -13,6 +13,7 @@ module Rhomobile
       def call(env)
         dup._call(env)
       end
+      
 
       def _call(env)
         @env = env
@@ -41,8 +42,7 @@ module Rhomobile
       
       def header
         if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
-          user = @env['HTTP_COOKIE']['rho_user']
-          p user
+          user = @env['HTTP_COOKIE']['rho_user'].split("=")[1]
           open("#{@nav_host}/nav/#{user}").read
         else
           open("#{@nav_host}/nav").read
