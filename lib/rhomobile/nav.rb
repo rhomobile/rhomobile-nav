@@ -6,7 +6,7 @@ module Rhomobile
       def initialize(app, options={})
         @app     = app
         @options = options
-        @options[:nav_host] ||= "http://rhohub.com"
+        @options[:nav_host] ||= "http://rhonav.rhohub.com"
         @nav_host = @options[:nav_host]
       end
 
@@ -22,7 +22,6 @@ module Rhomobile
       def can_insert?(env)
         return unless @status == 200
         return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
-        return if env['PATH_INFO'] == "/nav"
         true
       end
       
