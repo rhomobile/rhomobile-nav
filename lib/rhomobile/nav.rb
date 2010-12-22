@@ -20,6 +20,7 @@ module Rhomobile
       end
 
       def can_insert?(env)
+        return unless @status == 200
         return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
         true
       end
