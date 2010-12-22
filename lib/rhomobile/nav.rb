@@ -9,12 +9,18 @@ module Rhomobile
         @options[:nav_host] ||= "http://rhonav.rhohub.com"
         @nav_host = @options[:nav_host]
       end
-
+      
       def call(env)
+        dup._call(env)
+      end
+
+      def _call(env)
         @env = env
-        @status, @headers, @response = @app.call(env)
+        @status, @headers, @body = @app.call(env)
+        @body.extend(Enumerable)
+        @body = @body.to_a.join
         insert! if can_insert?(env)
-        [@status, @headers, @response.body]
+        [@status, @headers, [@body]]
       end
 
       def can_insert?(env)
@@ -24,9 +30,9 @@ module Rhomobile
       end
       
       def insert!
-        @response.body.gsub!(/(<body.*>)/i, "\\1#{header}")
+        @body.gsub!(/(<body.*>)/i, "\\1#{header}")
         #@body.gsub!(/(<\/body>)/i, "#{footer}\\1")
-        @headers['Content-Length'] = @response.body.length.to_s
+        @headers['Content-Length'] = @body.length.to_s
       end
       
       def footer
@@ -36,6 +42,7 @@ module Rhomobile
       def header
         if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
           user = @env['HTTP_COOKIE']['rho_user']
+          p user
           open("#{@nav_host}/nav/#{user}").read
         else
           open("#{@nav_host}/nav").read
