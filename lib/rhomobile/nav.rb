@@ -12,11 +12,9 @@ module Rhomobile
 
       def call(env)
         @env = env
-        @status, @headers, @body = @app.call(env)
-        @body.extend(Enumerable)
-        @body = @body.to_a.join
+        @status, @headers, @response = @app.call(env)
         insert! if can_insert?(env)
-        [@status, @headers, [@body]]
+        [@status, @headers, @response.body]
       end
 
       def can_insert?(env)
@@ -26,9 +24,9 @@ module Rhomobile
       end
       
       def insert!
-        @body.gsub!(/(<body.*>)/i, "\\1#{header}")
+        @response.body.gsub!(/(<body.*>)/i, "\\1#{header}")
         #@body.gsub!(/(<\/body>)/i, "#{footer}\\1")
-        @headers['Content-Length'] = @body.length.to_s
+        @headers['Content-Length'] = @response.body.length.to_s
       end
       
       def footer
