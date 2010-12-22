@@ -22,7 +22,7 @@ module Rhomobile
       def can_insert?(env)
         return unless @status == 200
         return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
-        return if env['PATH_INFO'] =~ /\/nav$/
+        return if env['PATH_INFO'] == "/nav"
         true
       end
       
