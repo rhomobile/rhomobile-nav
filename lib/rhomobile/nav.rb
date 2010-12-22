@@ -42,7 +42,8 @@ module Rhomobile
       
       def header
         if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
-          user = @env['HTTP_COOKIE']['rho_user'].split("=")[1]
+          cookies = Rack::Request.new(@env).cookies
+          user = cookies['rho_user']
           open("#{@nav_host}/nav/#{user}").read
         else
           open("#{@nav_host}/nav").read
