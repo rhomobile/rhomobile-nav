@@ -6,7 +6,6 @@ module Rhomobile
       def initialize(app, options={})
         @app     = app
         @options = options
-        @options[:status] ||= [200]
         @options[:nav_host] ||= "http://rhohub.com"
         @nav_host = @options[:nav_host]
       end
@@ -21,7 +20,6 @@ module Rhomobile
       end
 
       def can_insert?(env)
-        return unless @options[:status].include?(@status)
         return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
         true
       end
