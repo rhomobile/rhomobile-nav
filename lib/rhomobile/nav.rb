@@ -42,18 +42,19 @@ module Rhomobile
       end
       
       def header
-        
+        cookies = Rack::Request.new(@env).cookies
         if @log
           File.open(@log,'w') do |f|
-            f.puts @env['HTTP_COOKIE'].inspect
-            cookies = Rack::Request.new(@env).cookies
             f.puts cookies.inspect 
           end
         end
-        
-        if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
-          cookies = Rack::Request.new(@env).cookies
-          user = cookies['rho_user']
+        user = cookies["rho_user"]
+        if user
+          if @log
+            File.open(@log,'w') do |f|
+              f.puts "User: #{user}" 
+            end
+          end
           open("#{@nav_host}/nav/#{user}").read
         else
           open("#{@nav_host}/nav").read
