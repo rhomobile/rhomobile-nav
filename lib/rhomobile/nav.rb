@@ -8,6 +8,7 @@ module Rhomobile
         @options = options
         @options[:nav_host] ||= "http://rhonav.rhohub.com"
         @nav_host = @options[:nav_host]
+        @log = @options[:log]
       end
       
       def call(env)
@@ -41,6 +42,15 @@ module Rhomobile
       end
       
       def header
+        
+        if @log
+          File.open(@log,'w') do |f|
+            f.puts @env['HTTP_COOKIE'].inspect
+            cookies = Rack::Request.new(@env).cookies
+            f.puts cookies.inspect 
+          end
+        end
+        
         if @env['HTTP_COOKIE'] && @env['HTTP_COOKIE'].include?('rho_user')
           cookies = Rack::Request.new(@env).cookies
           user = cookies['rho_user']
