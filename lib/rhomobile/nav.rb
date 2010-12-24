@@ -7,6 +7,8 @@ module Rhomobile
         @app     = app
         @options = options
         @options[:nav_host] ||= "http://rhonav.rhohub.com"
+        @options[:blog] ||= false
+        @options[:subscribe] ||= false
         @nav_host = @options[:nav_host]
       end
       
@@ -43,10 +45,11 @@ module Rhomobile
       def header
         cookies = Rack::Request.new(@env).cookies
         user = cookies["rho_user"]
+        url = "#{@nav_host}/nav"
         if user
-          open("#{@nav_host}/nav/#{user}").read
+          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}").read
         else
-          open("#{@nav_host}/nav").read
+          open(url).read
         end
       end
 
