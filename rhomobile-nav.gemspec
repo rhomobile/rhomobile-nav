@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rhomobile-nav}
-  s.version = "0.0.16"
+  s.version = "0.0.17"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["David Dollar", "Pedro Belo", "Todd Matthews"]
-  s.date = %q{2010-12-24}
+  s.date = %q{2010-12-27}
   s.description = %q{}
   s.email = ["david@heroku.com", "pedro@heroku.com", "todd@heroku.com"]
   s.extra_rdoc_files = [

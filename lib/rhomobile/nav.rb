@@ -48,7 +48,7 @@ module Rhomobile
         if user
           open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}").read
         else
-          open(url).read
+          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}").read
         end
       end
 
