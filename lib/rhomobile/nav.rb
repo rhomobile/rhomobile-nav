@@ -20,7 +20,8 @@ module Rhomobile
 
       def _call(env)
         @env = env
-        @status, @headers,@body = @app.call(env)
+
+        @status, @headers, @body = @app.call(env)
         @body.extend(Enumerable)
         @body = @body.to_a.join
         insert! if can_insert?(env)
@@ -38,9 +39,7 @@ module Rhomobile
         @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
-      def footer
-        cookies = Rack::Request.new(@env).cookies
-        user = cookies["rho_user"]        
+      def footer         
         open("#{@nav_host}/footer/nav").read
       end
       
