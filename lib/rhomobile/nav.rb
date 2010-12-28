@@ -20,29 +20,28 @@ module Rhomobile
 
       def _call(env)
         @env = env
-        @status, @headers,@footers, @body = @app.call(env)
+        @status, @headers,@body = @app.call(env)
         @body.extend(Enumerable)
         @body = @body.to_a.join
         insert! if can_insert?(env)
-        [@status, @headers,@footers, [@body]]
+        [@status, @headers, [@body]]
       end
 
       def can_insert?(env)
-        return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/ || @footers['content-type'] =~ /text\/html/ || @footers['Content-type'] =~ /text\/html/
+        return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
         true
       end
       
       def insert!
         @body.gsub!(/(<body.*>)/i, "\\1#{header}")        
-        @headers['Content-Length'] = @body.length.to_s
+        @headers['Content-Length'] = @body.length.to_s        
         @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
       def footer
         cookies = Rack::Request.new(@env).cookies
-        user = cookies["rho_user"]
-        url = "#{@nav_host}/nav"
-        open("#{url}/#{user}/footer").read
+        user = cookies["rho_user"]        
+        open("#{@nav_host}/footer/nav").read
       end
       
       def header
