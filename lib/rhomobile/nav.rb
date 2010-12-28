@@ -9,6 +9,7 @@ module Rhomobile
         @options[:nav_host] ||= "http://rhonav.rhohub.com"
         @options[:blog] ||= false
         @options[:subscribe] ||= false
+        @options[:support] ||= false
         @nav_host = @options[:nav_host]
       end
       
@@ -46,9 +47,9 @@ module Rhomobile
         user = cookies["rho_user"]
         url = "#{@nav_host}/nav"
         if user
-          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}").read
+          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
         else
-          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}").read
+          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
         end
       end
 
