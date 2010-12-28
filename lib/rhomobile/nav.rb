@@ -38,13 +38,6 @@ module Rhomobile
         #@body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
-      def footer
-        cookies = Rack::Request.new(@env).cookies
-        user = cookies["rho_user"]
-        url = "#{@nav_host}/nav"
-        open("#{url}/#{user}/footer").read
-      end
-      
       def header
         cookies = Rack::Request.new(@env).cookies
         user = cookies["rho_user"]
