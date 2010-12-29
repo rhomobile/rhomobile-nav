@@ -34,12 +34,12 @@ module Rhomobile
       
       def insert!
         @body.gsub!(/(<body.*>)/i, "\\1#{header}")        
-        @headers['Content-Length'] = @body.length.to_s        
+        @headers['Content-Length'] = @body.length.to_s
+        puts footer
         @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
-      def footer
-        p "#{@nav_host}/footer/nav"
+      def footer        
         open("#{@nav_host}/footer/nav").read
       end
       
