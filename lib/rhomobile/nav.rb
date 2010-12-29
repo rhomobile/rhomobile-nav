@@ -38,7 +38,8 @@ module Rhomobile
         @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
-      def footer         
+      def footer
+        p "#{@nav_host}/footer/nav"
         open("#{@nav_host}/footer/nav").read
       end
       
