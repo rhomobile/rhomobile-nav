@@ -20,7 +20,6 @@ module Rhomobile
 
       def _call(env)
         @env = env
-
         @status, @headers, @body = @app.call(env)
         @body.extend(Enumerable)
         @body = @body.to_a.join
@@ -36,8 +35,7 @@ module Rhomobile
       def insert!
         @body.gsub!(/(<body.*>)/i, "\\1#{header}")        
         @headers['Content-Length'] = @body.length.to_s        
-        p @body.gsub!(/(<body.*>)/i, "#{footer}\\1")
-
+        @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
       def footer         
