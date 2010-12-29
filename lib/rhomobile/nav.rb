@@ -35,7 +35,7 @@ module Rhomobile
       def insert!
         @body.gsub!(/(<body.*>)/i, "\\1#{header}")        
         @headers['Content-Length'] = @body.length.to_s
-        puts footer
+        p "lo q returna footer #{footer}"
         @body.gsub!(/(<\/body>)/i, "#{footer}\\1")
       end
       
