@@ -34,7 +34,7 @@ module Rhomobile
       
       def insert!
         @body.gsub!(/(<div id="container".*>)/i, "\\1#{header}")        
-        @body.gsub!(/(<\/div*>)/i, "#{footer}\\1")
+        @body.gsub!(/(<\/div><!-- end container)/i, "#{footer}\\1")
         @headers['Content-Length'] = @body.length.to_s
         @headers['content-length'] = @body.length.to_s
       end
