@@ -10,6 +10,7 @@ module Rhomobile
         @options[:blog] ||= false
         @options[:subscribe] ||= false
         @options[:support] ||= false
+        @options[:footer] ||= true
         @nav_host = @options[:nav_host]
       end
       
@@ -34,7 +35,7 @@ module Rhomobile
       
       def insert!
         @body.gsub!(/(<div id="container".*>)/i, "\\1#{header}")        
-        @body.gsub!(/(<\/div>( *|)<!-- end container -->)/i, "#{footer}\\1")
+        @body.gsub!(/(<\/div>( *|)<!-- end container -->)/i, "#{footer}\\1") if @options[:footer]
         @headers['Content-Length'] = @body.length.to_s
         @headers['content-length'] = @body.length.to_s
       end
