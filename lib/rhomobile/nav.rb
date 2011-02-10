@@ -10,7 +10,6 @@ module Rhomobile
         @options[:blog] ||= false
         @options[:subscribe] ||= false
         @options[:support] ||= false
-        @options[:footer] ||= true
         @nav_host = @options[:nav_host]
       end
       
