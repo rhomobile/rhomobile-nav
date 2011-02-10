@@ -40,7 +40,7 @@ module Rhomobile
       end
       
       def footer        
-        open("#{@nav_host}/footer/nav").read
+        open("#{@nav_host}/footer/nav?footer=#{@options[:footer]}").read
       end
       
       def header
@@ -48,9 +48,9 @@ module Rhomobile
         user = cookies["rho_user"]
         url = "#{@nav_host}/nav"
         if user
-          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}&footer=#{@options[:footer]}").read
+          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
         else
-          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}&footer=#{@options[:footer]}").read
+          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
         end
       end
 
