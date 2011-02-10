@@ -35,7 +35,7 @@ module Rhomobile
       
       def insert!
         @body.gsub!(/(<div id="container".*>)/i, "\\1#{header}")        
-        @body.gsub!(/(<\/div>( *|)<!-- end container -->)/i, "#{footer}\\1") if @options[:footer]
+        @body.gsub!(/(<\/div>( *|)<!-- end container -->)/i, "#{footer}\\1")
         @headers['Content-Length'] = @body.length.to_s
         @headers['content-length'] = @body.length.to_s
       end
@@ -49,9 +49,9 @@ module Rhomobile
         user = cookies["rho_user"]
         url = "#{@nav_host}/nav"
         if user
-          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
+          open("#{url}/#{user}?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}&footer=#{@options[:footer]}").read
         else
-          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}").read
+          open(url+"?blog=#{@options[:blog]}&subscribe=#{@options[:subscribe]}&support=#{@options[:support]}&footer=#{@options[:footer]}").read
         end
       end
 
