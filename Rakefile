@@ -18,7 +18,7 @@ begin
     gemspec.add_development_dependency(%q<rspec>, [">= 2.0.0"])
     gemspec.add_development_dependency(%q<sinatra>, [">= 0"])
     gemspec.add_development_dependency(%q<rack-test>, [">= 0"])
-    gemspec.version = '0.0.33' #rake build in folder to upgrade .gemspec file
+    gemspec.version = '0.0.34' #rake build in folder to upgrade .gemspec file
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: gem install jeweler"
