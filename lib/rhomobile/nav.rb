@@ -6,17 +6,17 @@ module Rhomobile
       def initialize(app, options={})
         @app     = app
         @options = options
-        @options[:nav_host] ||= "http://rhonav.rhohub.com"
+        @options[:nav_host] ||= "https://nav.rhohub.com"
         @options[:blog] ||= false
         @options[:subscribe] ||= false
         @options[:support] ||= false
         @nav_host = @options[:nav_host]
       end
-      
+
       def call(env)
         dup._call(env)
       end
-      
+
 
       def _call(env)
         @env = env
@@ -31,18 +31,18 @@ module Rhomobile
         return unless @headers['Content-Type'] =~ /text\/html/ || @headers['content-type'] =~ /text\/html/
         true
       end
-      
+
       def insert!
-        @body.gsub!(/(<div id="container".*>)/i, "\\1#{header}")        
+        @body.gsub!(/(<div id="container".*>)/i, "\\1#{header}")
         @body.gsub!(/(<\/div>( *|)<!-- end container -->)/i, "#{footer}\\1")
         @headers['Content-Length'] = @body.length.to_s
         @headers['content-length'] = @body.length.to_s
       end
-      
-      def footer        
+
+      def footer
         open("#{@nav_host}/footer/nav?footer=#{@options[:footer]}").read
       end
-      
+
       def header
         cookies = Rack::Request.new(@env).cookies
         user = cookies["rho_user"]
